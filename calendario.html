@@ -1,0 +1,152 @@
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calendario Interactivo con Imagen</title>
+<style>
+  body {
+    margin: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .calendar-container {
+    position: relative;
+    width: 800px; 
+    height: 800px; 
+    background: url('https://i.imgur.com/TAV9ZFT.jpeg') no-repeat center/contain;
+  }
+  .day-area {
+    position: absolute;
+    cursor: pointer;
+  }
+
+#day1 { top: 42.5%; left:21%; width: 08%; height: 8.7%;}
+#day2 { top: 42.5%; left: 31%; width: 08%; height: 8.7%;}
+#day3 { top: 42.5%; left: 41%; width: 08%; height: 8.7%;}
+#day4 { top: 42.5%; left: 51%; width: 08%; height: 8.7%;}
+#day5 { top: 42.5%; left: 61%; width: 08%; height: 8.7%;}
+#day6 { top: 42.5%; left: 71%; width: 08%; height: 8.7%;}
+
+#day7 { top: 52.9%; left: 21%; width: 08%; height: 8.7%;}
+#day8 { top: 52.9%; left: 31%; width: 08%; height: 8.7%;}
+#day9 { top: 52.9%; left: 41%; width: 08%; height: 8.7%;}
+#day10 { top: 52.9%; left: 51%; width: 08%; height: 8.7%;}
+#day11 { top: 52.9%; left: 61%; width: 08%; height: 8.7%;}
+#day12 { top: 52.9%; left: 71%; width: 08%; height: 8.7%;}
+
+#day13 { top: 62.9%; left: 21%; width: 08%; height: 8.7%;}
+#day14 { top: 62.9%; left: 31%;width: 08%; height: 8.7%;}
+#day15 { top: 62.9%; left: 41%; width: 08%; height: 8.7%;}
+#day16 { top: 62.9%; left: 51%; width: 08%; height: 8.7%;}
+#day17 { top: 62.9%; left: 61%; width: 08%; height: 8.7%;}
+#day18 { top: 62.9%; left: 71%; width: 08%; height: 8.7%;}
+  
+#day19 { top: 73%; left: 21%; width: 08%; height: 8.7%;}
+#day20 { top: 73%; left: 31%; width: 08%; height: 8.7%;}
+#day21 { top: 73%; left: 41%; width: 08%; height: 8.7%;}
+#day22 { top: 73%; left: 51%; width: 08%; height: 8.7%;}
+#day23 { top: 73%; left: 61%; width: 08%; height: 8.7%;}
+#day24 { top: 73%; left: 71%; width: 08%; height: 8.7%;}
+
+  /* Estilo para el contenido ampliado */
+  .opened-day {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+    margin-left: -160px;
+    margin-top: -160px;
+    background-color: white;
+    color: black;
+    font-size: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .close-btn {
+    margin-top: 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .close-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+<div class="calendar-container">
+  <div class="day-area" id="day1" onclick="openDay(1)"></div>
+  <div class="day-area" id="day2" onclick="openDay(2)"></div>
+  <div class="day-area" id="day3" onclick="openDay(3)"></div>
+  <div class="day-area" id="day4" onclick="openDay(4)"></div>
+
+  <div class="day-area" id="day5" onclick="openDay(5)"></div>
+  <div class="day-area" id="day6" onclick="openDay(6)"></div>
+  <div class="day-area" id="day7" onclick="openDay(7)"></div>
+  <div class="day-area" id="day8" onclick="openDay(8)"></div>
+
+  <div class="day-area" id="day9" onclick="openDay(9)"></div>
+  <div class="day-area" id="day10" onclick="openDay(10)"></div>
+  <div class="day-area" id="day11" onclick="openDay(11)"></div>
+  <div class="day-area" id="day12" onclick="openDay(12)"></div>
+
+  <div class="day-area" id="day13" onclick="openDay(13)"></div>
+  <div class="day-area" id="day14" onclick="openDay(14)"></div>
+  <div class="day-area" id="day15" onclick="openDay(15)"></div>
+  <div class="day-area" id="day16" onclick="openDay(16)"></div>
+
+  <div class="day-area" id="day17" onclick="openDay(17)"></div>
+  <div class="day-area" id="day18" onclick="openDay(18)"></div>
+  <div class="day-area" id="day19" onclick="openDay(19)"></div>
+  <div class="day-area" id="day20" onclick="openDay(20)"></div>
+
+  <div class="day-area" id="day21" onclick="openDay(21)"></div>
+  <div class="day-area" id="day22" onclick="openDay(22)"></div>
+  <div class="day-area" id="day23" onclick="openDay(23)"></div>
+  <div class="day-area" id="day24" onclick="openDay(24)"></div>
+</div>
+
+<script>
+  function openDay(dayNumber) {
+    // Cierra cualquiera abierto antes
+    closeDay();
+
+    // Crear el div ampliado
+    const opened = document.createElement('div');
+    opened.classList.add('opened-day');
+    opened.id = 'opened-day';
+
+    // Contenido
+    opened.innerHTML = `
+      <div><strong>Día ${dayNumber}</strong></div>
+      <div>Contenido del día ${dayNumber}</div>
+      <button class="close-btn" onclick="closeDay()">Cerrar</button>
+    `;
+
+    document.body.appendChild(opened);
+  }
+
+  function closeDay() {
+    const opened = document.getElementById('opened-day');
+    if(opened) {
+      opened.remove();
+    }
+  }
+</script>
+
+</body>
+</html>
